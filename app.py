@@ -41,6 +41,7 @@ aptitude = st.sidebar.slider("🧠 Aptitude Score", 0, 100, 60)
 communication = st.sidebar.slider("🗣 Communication Skills", 0, 100, 70)
 attendance = st.sidebar.slider("📊 Attendance (%)", 0, 100, 75)
 certifications = st.sidebar.number_input("📜 Certifications", min_value=0, step=1)
+coding = st.sidebar.slider("💻 Coding Skills", 0, 10, 7)
 
 # ================== MAIN UI ==================
 st.markdown(
@@ -56,21 +57,21 @@ st.markdown(
 if st.button("🚀 Predict Placement"):
 
     input_data = pd.DataFrame([{
-    "cgpa": cgpa,
-    "backlogs": backlogs,
-    "internships": internships,
-    "projects": projects,
-    "aptitude": aptitude,
-    "communication": communication,
-    "attendance": attendance,
-    "certifications": certifications,
-    "dummy": 0
-}])
+        "cgpa": cgpa,
+        "backlogs": backlogs,
+        "internships": internships,
+        "projects": projects,
+        "aptitude": aptitude,
+        "coding": coding,
+        "communication": communication,
+        "attendance": attendance,
+        "certifications": certifications
+    }])
 
     probability = model.predict_proba(input_data)[0][1]
     chance = int(probability * 100)
 
-    # 🎯 Chance meter
+    # 🎯 Chance Meter
     if chance >= 80:
         st.success(f"🟢 Excellent! Your placement chance is **{chance}%**")
     elif chance >= 60:
